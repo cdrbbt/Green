@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Green</string>
+    <string name="internal">Check indoor condition</string>
+    <string name="external">Check outdoors condition</string>
+    <string name="library">Plant library</string>
+    <string name="saved">Saved locations</string>
+    <string name="temperature">Temperature</string>
+    <string name="humidity">Humidity</string>
 </resources>
