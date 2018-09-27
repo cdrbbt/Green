@@ -29,6 +29,11 @@ class InternalMeasurement : AppCompatActivity(), SensorEventListener {
         sensorManager.registerListener(this, humiditySensor, SensorManager.SENSOR_DELAY_NORMAL)
     }
 
+    override fun onPause() {
+        super.onPause()
+        sensorManager.unregisterListener(this)
+    }
+
     override fun onSensorChanged(event: SensorEvent?) {
          when(event?.sensor) {
              humiditySensor -> humidityValue.text = event.values[0].toString()
