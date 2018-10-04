@@ -15,14 +15,17 @@ object DarkSkyApi {
             .build()
 
     object Model{
-        data class WeatherData(val timezone: String)
+        data class WeatherData(val daily: Daily)
+        data class Daily(val data: List<wData>)
+        data class wData(val time: String, val windSpeed:String, val temperatureMin:Float, val precipAccumulation:String,
+                         val precipIntensity: String)
 
     }
 
     interface Service {
-        @GET("{latittude},{longitude},{time}?exclude=currently,minutely,hourly,flags")
-    fun dateAndLocaton(@Path("latitude") latitude: String, @Path("longitude") longitude: String,
-                       @Path("time") time: String): Call<Model.WeatherData>
+        @GET("{latitude},{longitude},{time}?exclude=currently,minutely,hourly,flags&units=si")
+    fun dateAndLocation(@Path("latitude") latitude: String, @Path("longitude") longitude: String,
+                        @Path("time") time: String): Call<Model.WeatherData>
     }
 
     val service = retrofit.create(Service::class.java)!!
