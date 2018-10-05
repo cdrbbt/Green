@@ -18,7 +18,7 @@ object DarkSkyApi {
         data class WeatherData(val daily: Daily)
         data class Daily(val data: List<wData>)
         data class wData(val time: String, val windSpeed:String, val temperatureMin:Float, val precipAccumulation:String,
-                         val precipIntensity: String)
+                         val precipIntensity: Float)
 
     }
 
