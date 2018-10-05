@@ -6,4 +6,6 @@
     <string name="saved">Saved locations</string>
     <string name="temperature">Temperature</string>
     <string name="humidity">Humidity</string>
+    <string name="Light">Light</string>
+    <string name="Take_measurement">Take measurement</string>
 </resources>
