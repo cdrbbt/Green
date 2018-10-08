@@ -10,7 +10,9 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity() {
@@ -45,6 +47,11 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+
+        Log.d("Before get", "AAAAAA")
+        val s = DBGenerator()
+        s.initializeDB(this)
+        Log.d("After get", "BBBBB")
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

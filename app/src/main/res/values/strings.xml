@@ -8,4 +8,6 @@
     <string name="humidity">Humidity</string>
     <string name="Light">Light</string>
     <string name="Take_measurement">Take measurement</string>
+    <string name="DBpreference">com.example.Green.DBpreference</string>
+    <string name="DBinit">DBinit</string>
 </resources>
