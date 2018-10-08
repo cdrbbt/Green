@@ -5,8 +5,10 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_internal_measurement.*
 import kotlin.math.roundToInt
 
@@ -41,6 +43,11 @@ class InternalMeasurement : AppCompatActivity(), SensorEventListener {
         measure.setOnClickListener{
             startMeasurement()
         }
+
+        PlantDB.get(this).plantDao().getAll().observe(this, Observer {
+            val t = it?.size
+            Log.d("DATABASE",t.toString())
+        })
     }
 
 

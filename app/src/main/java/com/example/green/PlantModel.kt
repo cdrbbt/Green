@@ -1,9 +1,9 @@
 package com.example.green
 
-import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.*
+import androidx.lifecycle.LiveData
+import androidx.room.*
 
-@Entity (tableName = "Plants")
+@Entity(tableName = "Plants")
 data class PlantModel(
         @PrimaryKey @ColumnInfo(name = "Accepted Symbol") var acceptedSymbol: String,
         @ColumnInfo(name = "Scientific Name") val scientificName: String,

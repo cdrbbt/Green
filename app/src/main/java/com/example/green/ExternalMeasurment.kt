@@ -2,13 +2,12 @@ package com.example.green
 
 
 import android.content.pm.PackageManager
-import android.content.res.Resources
 import android.location.Location
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.text.format.DateUtils
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.android.gms.location.LocationServices
 import kotlinx.android.synthetic.main.activity_external_measurment.*
 import retrofit2.Call
@@ -37,8 +36,9 @@ class ExternalMeasurment : AppCompatActivity() {
             fusedLocationClient.lastLocation.addOnCompleteListener(this) {
                 task ->
                 if (task.isSuccessful && task.result != null) {
-                    Log.d("GEOLOCATION", "${task.result.latitude},${task.result.longitude},$time")
-                    getWeatherData(task.result, time, WEATHER_SAMPLE_SIZE)
+                    val x = task.result
+                    Log.d("GEOLOCATION", "${task.result!!.latitude},${task.result!!.longitude},$time")
+                    getWeatherData(task.result!!, time, WEATHER_SAMPLE_SIZE)
                 } else {
                     Log.d("GEOLOCATION", "TASKFAIL")
                     Log.d("GEOLOCATION", task.exception.toString())

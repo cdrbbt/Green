@@ -1,11 +1,13 @@
 package com.example.green
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.Room
-import android.arch.persistence.room.RoomDatabase
+
+
 import android.content.Context
 import android.util.Log
-import com.huma.room_for_asset.RoomAsset
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+
 
 @Database(entities = [(PlantModel::class)], version = 3, exportSchema = false)
 abstract class PlantDB: RoomDatabase() {

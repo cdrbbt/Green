@@ -1,8 +1,6 @@
 package com.example.green
 
 import android.content.Context
-import android.content.res.Resources
-import android.util.Log
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
@@ -30,8 +28,13 @@ class DBGenerator {
                     val x = new.split(",")
                     val pl = makeEntry(x)
                     PlantDB.get(context).plantDao().addPlant(pl)
+                    return
                 }
+                val pl2 = makeEntry(it.split(","))
+                PlantDB.get(context).plantDao().addPlant(pl2)
             }
+            val pref = context.getSharedPreferences(context.getString(R.string.DBpreference), Context.MODE_PRIVATE)
+            pref.edit().putBoolean(context.getString(R.string.DBinit), true).apply()
         }
     }
 
