@@ -35,7 +35,7 @@ class DBworker(context: Context, params: WorkerParameters): Worker(context, para
         return Worker.Result.SUCCESS
     }
 
-    
+
     private fun makeEntry(x:List<String>): PlantModel{
         return PlantModel(x[0],x[1],x[2].capitalize(),x[3],x[4],x[5],x[6],x[7],x[8],x[9],x[10],x[11],x[12],x[13].toInt(),x[14],x[15],
                 x[16].toFloat(),x[17].toFloat(),x[18].toInt(),x[19].toInt(),x[20].toInt(),x[21].toInt(),x[22].toInt(),x[23],x[24],x[25].toInt())
