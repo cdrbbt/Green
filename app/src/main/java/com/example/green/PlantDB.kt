@@ -1,9 +1,7 @@
 package com.example.green
 
 
-
 import android.content.Context
-import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -17,14 +15,11 @@ abstract class PlantDB: RoomDatabase() {
         @Synchronized
         fun get(context: Context): PlantDB {
             if (sInstance == null) {
-                Log.d("CREATING", "PLANTS HERE")
                 sInstance = Room.databaseBuilder(context.applicationContext,
                         PlantDB::class.java,
                         "plant1").build()
             }
             return sInstance!!
         }
-
-
     }
 }
