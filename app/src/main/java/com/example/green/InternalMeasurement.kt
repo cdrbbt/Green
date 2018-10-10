@@ -6,10 +6,9 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_internal_measurement.*
+import org.jetbrains.anko.startActivity
 import kotlin.math.roundToInt
 
 class InternalMeasurement : AppCompatActivity(), SensorEventListener {
@@ -18,17 +17,16 @@ class InternalMeasurement : AppCompatActivity(), SensorEventListener {
     lateinit var temperatureSensor: Sensor
     lateinit var lightSensor: Sensor
 
-    val TEMPERATURE_EXTREME_LOW = 5
-    val TEMPERATURE_LOW = 15
-    val TEMPERATURE_HIGH =25
-    val TEMPERATURE_EXTREME_HIGH = 30
+    var temp: Int? = null
 
-    val HUMIDITY_LOW = 30
-    val HUMIDITY_HIGH = 60
+    private val TEMPERATURE_LOW = 15
+    private val TEMPERATURE_HIGH =25
 
-    val LIGHT_LOW = 2500
-    val LIGHT_MEDIUM = 10000
-    val LIGHT_HIGH = 20000
+    private val HUMIDITY_LOW = 30
+    private val HUMIDITY_HIGH = 60
+
+    private val LIGHT_LOW = 2500
+    private val LIGHT_HIGH = 10000
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,10 +42,11 @@ class InternalMeasurement : AppCompatActivity(), SensorEventListener {
             startMeasurement()
         }
 
-        PlantDB.get(this).plantDao().getAll().observe(this, Observer {
-            val t = it?.size
-            Log.d("DATABASE",t.toString())
-        })
+        findPlants.setOnClickListener {
+            startActivity<PlantList>(getString(R.string.IntentTemp) to temp!!)
+        }
+
+        startMeasurement()
     }
 
 
@@ -69,9 +68,18 @@ class InternalMeasurement : AppCompatActivity(), SensorEventListener {
                  val hValue = event.values[0]
 
                  when{
-                     hValue < HUMIDITY_LOW -> humidityValue.setTextColor(getColor(R.color.Extreme))
-                     hValue < HUMIDITY_HIGH -> humidityValue.setTextColor(getColor(R.color.Moderate))
-                     else -> humidityValue.setTextColor(getColor(R.color.Good))
+                     hValue < HUMIDITY_LOW -> {
+                         humidityValue.setTextColor(getColor(R.color.Extreme))
+                         humidityDesc.text = getString(R.string.lowHumidityDesc)
+                     }
+                     hValue < HUMIDITY_HIGH -> {
+                         humidityValue.setTextColor(getColor(R.color.Moderate))
+                         humidityDesc.text = getString(R.string.medHumidityDesc)
+                     }
+                     else -> {
+                         humidityValue.setTextColor(getColor(R.color.Good))
+                         humidityDesc.text = getString(R.string.hiHumidityDesc)
+                     }
                  }
 
                  val display = "${hValue}%"
@@ -81,22 +89,41 @@ class InternalMeasurement : AppCompatActivity(), SensorEventListener {
                  sensorManager.unregisterListener(this, temperatureSensor)
                  val tValue = event.values[0]
                  when{
-                     tValue < TEMPERATURE_EXTREME_LOW || tValue > TEMPERATURE_EXTREME_HIGH ->
+                     tValue < TEMPERATURE_LOW ->{
                          tempValue.setTextColor(getColor(R.color.Extreme))
-                     tValue < TEMPERATURE_LOW || tValue > TEMPERATURE_HIGH ->
-                         tempValue.setTextColor(getColor(R.color.Moderate))
-                     else -> tempValue.setTextColor(getColor(R.color.Good))
+                         tempDesc.text = getString(R.string.lowTempDesc)
+                     }
+                     tValue < TEMPERATURE_HIGH  ->{
+                         tempValue.setTextColor(getColor(R.color.Good))
+                         tempDesc.text = getString(R.string.lowTempDesc)
+                     }
+
+                     else -> {
+                         tempValue.setTextColor(getColor(R.color.Extreme))
+                         tempDesc.text = getString(R.string.hiTempDesc)
+                     }
                  }
-                 val display = "${tValue}C"
-                 tempValue.text = display
+
+                 //fahrenheit
+                 temp = (tValue*9/5+32).toInt()
+                 tempValue.text = "$temp F"
              }
              lightSensor -> {
                  sensorManager.unregisterListener(this, lightSensor)
                  val lValue = event.values[0]
                  when{
-                     lValue < LIGHT_LOW -> lightValue.setTextColor(getColor(R.color.Extreme))
-                     lValue < LIGHT_MEDIUM -> lightValue.setTextColor(getColor(R.color.Moderate))
-                     else -> lightValue.setTextColor(getColor(R.color.Good))
+                     lValue < LIGHT_LOW -> {
+                         lightValue.setTextColor(getColor(R.color.Extreme))
+                         lightDesc.text = getString(R.string.lowLightDesc)
+                     }
+                     lValue < LIGHT_HIGH -> {
+                         lightValue.setTextColor(getColor(R.color.Moderate))
+                         lightDesc.text = getString(R.string.medLightDesc)
+                     }
+                     else -> {
+                         lightValue.setTextColor(getColor(R.color.Good))
+                         lightDesc.text = getString(R.string.hiLightDesc)
+                     }
                  }
                  val display = "${event.values[0].roundToInt()} lux"
                  lightValue.text = display

@@ -10,8 +10,11 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.startActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -45,6 +48,16 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this,ExternalMeasurment::class.java)
                 startActivity(intent)
             }
+        }
+
+        library.setOnClickListener {
+            startActivity<PlantList>()
+        }
+
+        val preferences = this.getSharedPreferences(this.getString(R.string.DBpreference), Context.MODE_PRIVATE)
+        if (!preferences.getBoolean(this.getString(R.string.DBinit), false)){
+            val generateDB = OneTimeWorkRequestBuilder<DBworker>().build()
+            WorkManager.getInstance().enqueue(generateDB)
         }
     }
 
