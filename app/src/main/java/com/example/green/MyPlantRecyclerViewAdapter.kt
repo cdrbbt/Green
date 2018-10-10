@@ -10,6 +10,7 @@ import android.widget.TextView
 import com.example.green.PlantFragment.OnListFragmentInteractionListener
 
 import kotlinx.android.synthetic.main.fragment_plant.view.*
+import org.w3c.dom.Text
 
 
 class MyPlantRecyclerViewAdapter(
@@ -35,8 +36,8 @@ class MyPlantRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        holder.mIdView.text = item.commonName
-
+        holder.name.text = item.commonName
+        holder.code.text = item.acceptedSymbol
         with(holder.mView) {
             tag = item
             setOnClickListener(mOnClickListener)
@@ -46,8 +47,8 @@ class MyPlantRecyclerViewAdapter(
     override fun getItemCount(): Int = mValues.size
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView = mView.name
-
+        val name: TextView = mView.name
+        val code: TextView = mView.code
         override fun toString(): String {
             return super.toString() + " '" + "'"
         }

@@ -21,7 +21,7 @@ class PlantDetail : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val plant = model.selected!!
         name.text = plant.commonName
-        tempValue.text = plant.tempMin.toString()
+        tempValue.text = "${plant.tempMin}F"
         precipValue.text = "${plant.precipMin} to ${plant.precipMax} in/y"
         growthValue.text = plant.growthHabit
         soilPHvalue.text = "${plant.phMin} to ${plant.phMax}"

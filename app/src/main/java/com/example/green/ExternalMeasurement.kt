@@ -154,8 +154,8 @@ class ExternalMeasurement : AppCompatActivity(), OnMapReadyCallback {
 
             //Converting to fahrenheit, that's what the db uses
             temperature = (tempMin*9/5+32).toInt()
-            PrecipValue.text = precip.toString()
-            tempValue.text = temperature.toString()
+            PrecipValue.text = precip.toInt().toString()
+            tempValue.text = "${temperature.toString()}F"
             progressBar.visibility = View.INVISIBLE
         }
     }

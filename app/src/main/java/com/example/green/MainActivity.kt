@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
         internal.setOnClickListener{
