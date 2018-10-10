@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                 ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION,
                         android.Manifest.permission.ACCESS_COARSE_LOCATION), 1)
             } else{
-                val intent = Intent(this,ExternalMeasurment::class.java)
+                val intent = Intent(this,ExternalMeasurement::class.java)
                 startActivity(intent)
             }
         }
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 1){
-            val intent = Intent(this,ExternalMeasurment::class.java)
+            val intent = Intent(this,ExternalMeasurement::class.java)
             startActivity(intent)
         }
     }

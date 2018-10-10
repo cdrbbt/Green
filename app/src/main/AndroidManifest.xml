@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".InternalMeasurement" />
-        <activity android:name=".ExternalMeasurment" />
+        <activity android:name=".ExternalMeasurement" />
         <activity android:name=".PlantList" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
