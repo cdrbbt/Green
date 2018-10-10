@@ -38,10 +38,10 @@ interface plantDao{
     @Query("SELECT * FROM Plants ORDER BY `Common Name` ASC")
     fun getAll(): LiveData<List<PlantModel>>
 
-    @Query("SELECT * FROM Plants WHERE `Temperature, Minimum (F)` > :tempMin ORDER BY `Common Name` ASC")
+    @Query("SELECT * FROM Plants WHERE `Temperature, Minimum (F)` < :tempMin ORDER BY `Common Name` ASC")
     fun getTemp(tempMin: Int): LiveData<List<PlantModel>>
 
-    @Query("SELECT * FROM Plants WHERE `Precipitation (Minimum)` < :precip AND `Precipitation (Maximum)`> :precip AND `Temperature, Minimum (F)` > :tempMin  ORDER BY `Common Name` ASC")
+    @Query("SELECT * FROM Plants WHERE `Precipitation (Minimum)` < :precip AND `Precipitation (Maximum)`> :precip AND `Temperature, Minimum (F)` < :tempMin  ORDER BY `Common Name` ASC")
     fun getTempPrecip(tempMin:Int, precip: Int): LiveData<List<PlantModel>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
