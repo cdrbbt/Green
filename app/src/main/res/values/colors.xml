@@ -6,7 +6,9 @@
     <color name="Extreme">#d50000</color>
     <color name="Moderate">#ffc400</color>
     <color name="Good">#00c853</color>
-    <color name="background">#d3b8ae</color>
+    <color name="background">#efdcd5</color>
     <color name="navbar">#4b2c20</color>
     <color name="text_color_primary">#000000</color>
+    <color name="text_color_secondary">#ffffff</color>
+    <color name="secondary_text_material_dark">#ffffff</color>
 </resources>
