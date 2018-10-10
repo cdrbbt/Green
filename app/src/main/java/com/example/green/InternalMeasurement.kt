@@ -12,12 +12,12 @@ import org.jetbrains.anko.startActivity
 import kotlin.math.roundToInt
 
 class InternalMeasurement : AppCompatActivity(), SensorEventListener {
-    lateinit var sensorManager: SensorManager
-    lateinit var humiditySensor: Sensor
-    lateinit var temperatureSensor: Sensor
-    lateinit var lightSensor: Sensor
+    private lateinit var sensorManager: SensorManager
+    private lateinit var humiditySensor: Sensor
+    private lateinit var temperatureSensor: Sensor
+    private lateinit var lightSensor: Sensor
 
-    var temp: Int? = null
+    private var temp: Int? = null
 
     private val TEMPERATURE_LOW = 15
     private val TEMPERATURE_HIGH =25
@@ -33,6 +33,7 @@ class InternalMeasurement : AppCompatActivity(), SensorEventListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_internal_measurement)
 
+        //Fetch sensors
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         humiditySensor = sensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY)
         temperatureSensor = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)
@@ -55,7 +56,7 @@ class InternalMeasurement : AppCompatActivity(), SensorEventListener {
         sensorManager.unregisterListener(this)
     }
 
-    fun startMeasurement(){
+    private fun startMeasurement(){
         sensorManager.registerListener(this, temperatureSensor, SensorManager.SENSOR_DELAY_NORMAL)
         sensorManager.registerListener(this, humiditySensor, SensorManager.SENSOR_DELAY_NORMAL)
         sensorManager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_NORMAL)
@@ -82,7 +83,7 @@ class InternalMeasurement : AppCompatActivity(), SensorEventListener {
                      }
                  }
 
-                 val display = "${hValue}%"
+                 val display = "$hValue%"
                  humidityValue.text = display
              }
              temperatureSensor -> {
@@ -95,7 +96,7 @@ class InternalMeasurement : AppCompatActivity(), SensorEventListener {
                      }
                      tValue < TEMPERATURE_HIGH  ->{
                          tempValue.setTextColor(getColor(R.color.Good))
-                         tempDesc.text = getString(R.string.lowTempDesc)
+                         tempDesc.text = getString(R.string.medTempDesc)
                      }
 
                      else -> {

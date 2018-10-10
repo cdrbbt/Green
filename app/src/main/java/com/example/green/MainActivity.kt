@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -19,12 +18,12 @@ import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var sensorManager: SensorManager
+    private lateinit var sensorManager: SensorManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Log.d("TEST", "HELP")
+
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
         internal.setOnClickListener{
@@ -54,6 +53,7 @@ class MainActivity : AppCompatActivity() {
             startActivity<PlantList>()
         }
 
+        //Checks if DB was generated from the /raw/rawdb file and generates one with a worker if not
         val preferences = this.getSharedPreferences(this.getString(R.string.DBpreference), Context.MODE_PRIVATE)
         if (!preferences.getBoolean(this.getString(R.string.DBinit), false)){
             val generateDB = OneTimeWorkRequestBuilder<DBworker>().build()

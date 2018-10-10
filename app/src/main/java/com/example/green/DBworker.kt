@@ -10,7 +10,7 @@ class DBworker(context: Context, params: WorkerParameters): Worker(context, para
     override fun doWork(): Result {
         val context = applicationContext
         val dbFile = context.resources.openRawResource(R.raw.rawdb)
-        BufferedReader(InputStreamReader(dbFile)).lineSequence().iterator().forEach {
+        BufferedReader(InputStreamReader(dbFile)).lineSequence().iterator().forEach { it ->
 
             /*Sometimes "a, b, c" occurs, so it's replaced with a b c to get rid of the excessive
             "" and commas*/

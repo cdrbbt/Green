@@ -9,10 +9,10 @@ import retrofit2.http.Path
 
 
 object DarkSkyApi {
-    val URL = "https://api.darksky.net/forecast/${API_KEY.WEATHER_API_KEY}/"
+    private val URL = "https://api.darksky.net/forecast/${API_KEY.WEATHER_API_KEY}/"
 
     val retrofit = Retrofit.Builder().baseUrl(URL).addConverterFactory(GsonConverterFactory.create())
-            .build()
+            .build()!!
 
     object Model{
         data class WeatherData(val daily: Daily)
