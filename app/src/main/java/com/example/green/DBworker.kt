@@ -6,6 +6,8 @@ import androidx.work.WorkerParameters
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
+
+//this populates the app database from a text file, since importing a ready database is not supported by room
 class DBworker(context: Context, params: WorkerParameters): Worker(context, params) {
     override fun doWork(): Result {
         val context = applicationContext

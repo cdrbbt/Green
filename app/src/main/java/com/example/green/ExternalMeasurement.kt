@@ -57,7 +57,6 @@ class ExternalMeasurement : AppCompatActivity(), OnMapReadyCallback {
                 val loc = Location("")
                 loc.latitude = latitude!!
                 loc.longitude = longtitude!!
-                Log.d("LOCATION", loc.toString())
                 createWeatherRequests(loc)
             }
         }
@@ -154,7 +153,7 @@ class ExternalMeasurement : AppCompatActivity(), OnMapReadyCallback {
 
             //Converting to fahrenheit, that's what the db uses
             temperature = (tempMin*9/5+32).toInt()
-            PrecipValue.text = precip.toInt().toString()
+            PrecipValue.text = "${precip.toInt()} in/y"
             tempValue.text = "${temperature.toString()}F"
             progressBar.visibility = View.INVISIBLE
         }
@@ -168,7 +167,6 @@ class ExternalMeasurement : AppCompatActivity(), OnMapReadyCallback {
             map!!.addMarker(MarkerOptions().position(it).visible(true))
             latitude = it.latitude
             longtitude = it.longitude
-            Log.d("REEE", it.toString())
         }
     }
 
