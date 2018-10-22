@@ -34,7 +34,7 @@ data class PlantModel(
         )
 
 @Dao
-interface PlantDao{
+interface plantDao{
     @Query("SELECT * FROM Plants ORDER BY `Common Name` ASC")
     fun getAll(): LiveData<List<PlantModel>>
 

@@ -22,7 +22,6 @@ class MyPlantRecyclerViewAdapter(
     init {
         mOnClickListener = View.OnClickListener { v ->
             val item = v.tag as PlantModel
-            //callback from interface
             mListener?.onListFragmentInteraction(item)
         }
     }

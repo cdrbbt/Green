@@ -1,18 +1,17 @@
 package com.example.green
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
-
 class PlantList : AppCompatActivity(), PlantFragment.OnListFragmentInteractionListener {
 
-    private lateinit var model: PlantListViewModel
+    lateinit var model: PlantListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

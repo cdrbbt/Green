@@ -17,8 +17,9 @@ class InternalMeasurement : AppCompatActivity(), SensorEventListener {
     private lateinit var temperatureSensor: Sensor
     private lateinit var lightSensor: Sensor
 
-    private var temp: Int? = null
+    var temp: Int? = null
 
+    //thresholds for values
     private val TEMPERATURE_LOW = 15
     private val TEMPERATURE_HIGH =25
 
@@ -33,7 +34,6 @@ class InternalMeasurement : AppCompatActivity(), SensorEventListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_internal_measurement)
 
-        //Fetch sensors
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         humiditySensor = sensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY)
         temperatureSensor = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)

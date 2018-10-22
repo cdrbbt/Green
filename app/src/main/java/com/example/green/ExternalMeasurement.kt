@@ -22,14 +22,14 @@ import retrofit2.Response
 
 class ExternalMeasurement : AppCompatActivity(), OnMapReadyCallback {
 
-    private val WEATHER_SAMPLE_SIZE = 10
-    private var requests_completed = 0
-    private val request_responces = mutableListOf<DarkSkyApi.Model.wData>()
+    val WEATHER_SAMPLE_SIZE = 100
+    var requests_completed = 0
+    val request_responces = mutableListOf<DarkSkyApi.Model.wData>()
     var map: GoogleMap? = null
     var temperature: Int? = null
-    private var precipration: Int? = null
-    private var latitude: Double? = null
-    private var longtitude: Double? = null
+    var precipration: Int? = null
+    var latitude: Double? = null
+    var longtitude: Double? = null
 
 
 
@@ -71,7 +71,7 @@ class ExternalMeasurement : AppCompatActivity(), OnMapReadyCallback {
     }
 
     //Checks permissions and tries to get last location
-    private fun fetchLocation(){
+    fun fetchLocation(){
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
@@ -92,7 +92,7 @@ class ExternalMeasurement : AppCompatActivity(), OnMapReadyCallback {
     }
 
     //Enqueues requests to darkskyAPI for weather data for sample size days in a year
-    private fun createWeatherRequests (location: Location){
+    fun createWeatherRequests (location: Location){
 
         progressBar.progress = 0
         progressBar.visibility = View.VISIBLE
@@ -170,7 +170,7 @@ class ExternalMeasurement : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun moveMap(lat:Double, lng:Double){
+    fun moveMap(lat:Double, lng:Double){
         if (map != null){
             map!!.clear()
             val pos = LatLng(lat,lng)
