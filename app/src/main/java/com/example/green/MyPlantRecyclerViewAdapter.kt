@@ -10,9 +10,8 @@ import android.widget.TextView
 import com.example.green.PlantFragment.OnListFragmentInteractionListener
 
 import kotlinx.android.synthetic.main.fragment_plant.view.*
-import org.w3c.dom.Text
 
-
+//Adapter class for plants list
 class MyPlantRecyclerViewAdapter(
         private val mValues: List<PlantModel>,
         private val mListener: OnListFragmentInteractionListener?)

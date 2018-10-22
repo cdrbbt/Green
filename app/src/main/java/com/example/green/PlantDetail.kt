@@ -17,6 +17,8 @@ class PlantDetail : Fragment() {
         return inflater.inflate(R.layout.plant_detail, container, false)
     }
 
+    /*in general the app isn't translatable due to the large amount of english text in the db
+    so usage of strings is not an issue*/
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val plant = model.selected!!

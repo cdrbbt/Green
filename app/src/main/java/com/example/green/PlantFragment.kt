@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import java.lang.Exception
 
-
+//Fragment for plant list
 class PlantFragment : Fragment() {
 
     private var columnCount = 1

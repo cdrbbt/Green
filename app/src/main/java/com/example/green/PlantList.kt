@@ -36,7 +36,6 @@ class PlantList : AppCompatActivity(), PlantFragment.OnListFragmentInteractionLi
             }
 
             temp != Int.MAX_VALUE ->{
-                Log.d("WORKS?", "!!!!!")
                 doAsync {
                     val plants = dbDAO.getTemp(temp)
                     uiThread {
@@ -47,7 +46,6 @@ class PlantList : AppCompatActivity(), PlantFragment.OnListFragmentInteractionLi
 
             else -> {
                 doAsync {
-                    Log.d("please no?", "!!!!!")
                     val plants = dbDAO.getAll()
                     uiThread {
                         updatePlantList(plants)
@@ -55,7 +53,6 @@ class PlantList : AppCompatActivity(), PlantFragment.OnListFragmentInteractionLi
                 }
             }
         }
-        Log.d("WHAT THE FUCK","HUH")
     }
 
     override fun onListFragmentInteraction(item:PlantModel?) {
@@ -73,7 +70,6 @@ class PlantList : AppCompatActivity(), PlantFragment.OnListFragmentInteractionLi
 
             val listFragment = PlantFragment()
             supportFragmentManager.beginTransaction().add(R.id.ListContainer, listFragment).commit()
-            Log.d("WORKS?", it.toString())
         })
     }
 }

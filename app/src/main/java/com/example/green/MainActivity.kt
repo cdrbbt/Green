@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
+        //Check if the necessary sensors are present on the device
         internal.setOnClickListener{
             if (sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE) == null
                     || sensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY) == null ){
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        //Ask for permissions needed for feature
         external.setOnClickListener{
             if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this,
@@ -52,7 +54,7 @@ class MainActivity : AppCompatActivity() {
             startActivity<PlantList>()
         }
 
-        //Checks if DB was generated from the /raw/rawdb file and generates one with a worker if not
+        //Check shared preferences if the app DB has been created, if not create from text file in background
         val preferences = this.getSharedPreferences(this.getString(R.string.DBpreference), Context.MODE_PRIVATE)
         if (!preferences.getBoolean(this.getString(R.string.DBinit), false)){
             val generateDB = OneTimeWorkRequestBuilder<DBworker>().build()
